@@ -1,0 +1,54 @@
+<?page title="User Setup" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="" border="none" apply="org.viktorisa.demoapp.controller.UserSetupComposer">
+	<groupbox closable="false" mold="3d">
+		<caption label="User Setup"/>
+		<div id="dvError" />
+		<grid sclass="form-entry">
+			<columns>
+				<column width="200px" align="right"/>
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<label value="Username"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<textbox id="txtUsername" maxlength="15" width="250px"></textbox>
+				</row>
+				<row>
+					<hbox>
+						<label value="Password"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<textbox id="txtPassword" maxlength="15" width="250px"></textbox>
+				</row>
+				<row>
+					<hbox>
+						<label value="Type"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<hbox>
+						<radiogroup id="rdgType" />
+						<radio id="rdUser" label="User" radiogroup="rdgType"></radio>
+						<separator width="30px"></separator>
+						<radio id="rdAdmin" label="Admin" radiogroup="rdgType"></radio>
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<separator height="20px"></separator>
+		<separator></separator>
+		<div style="height:30px; width: 100%;">
+			<div style="float:right;">
+				<button id="btnCancel"
+						label="Cancel" mold="trendy"/>			
+			</div>
+			<div style="float:right; margin-right:41%;">
+				<button id="btnSave" label="Save" mold="trendy"></button>
+			</div>
+		</div>
+	</groupbox>
+</window>
+</zk>

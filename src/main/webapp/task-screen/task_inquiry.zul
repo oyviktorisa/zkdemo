@@ -1,0 +1,39 @@
+<?page title="Task Inquiry" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="Task Inquiry" border="none" apply="org.viktorisa.demoapp.controller.TaskInquiryComposer">
+	<groupbox closable="false" mold="3d">
+		<caption label="Task Inquiry"></caption>
+		<grid>
+			<columns>
+				<column width="200px" align="right"></column>
+				<column></column>
+			</columns>
+			<rows>
+				<row>
+					<textbox id="txtTaskName"></textbox>
+					<button id="btnFind" mold="trendy" label="Search Task Name"></button>
+				</row>
+			</rows>
+		</grid>
+		<separator height="20px"></separator>
+		<groupbox closable="false">
+			<listbox id="lstTask" mold="paging" pagingPosition="both" emptyMessage="No Data Found" pageSize="20">
+				<listhead visible="true">
+					<listheader label="Task Name" width="250px" sort="auto(taskName)"></listheader>
+					<listheader label="Assignee" width="100px" sort="auto(assigneeName)"></listheader>
+					<listheader label="Created At" width="100px" sort="auto(creationDate)"></listheader>
+					<listheader label="Finished At" width="100px" sort="auto(finishDate)"></listheader>
+					<listheader label="Operations"></listheader>
+				</listhead>
+			</listbox>
+		</groupbox>
+		<separator></separator>
+		<div style="height:30px; width: 100%;">
+			<div style="float:right;">
+				<button id="btnAdd"
+						label="Add New Task" mold="trendy" />			
+			</div>
+		</div>
+	</groupbox>
+</window>
+</zk>

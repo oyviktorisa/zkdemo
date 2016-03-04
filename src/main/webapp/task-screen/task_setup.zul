@@ -1,0 +1,49 @@
+<?page title="new page title" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="" border="none" apply="org.viktorisa.demoapp.controller.TaskSetupComposer">
+	<groupbox closable="false" mold="3d">
+		<caption label="Task Setup"/>
+		<div id="dvError" />
+		<grid sclass="form-entry">
+			<columns>
+				<column width="200px" align="right"/>
+				<column />
+			</columns>
+			<rows>
+				<row>
+					<hbox>
+						<label value="Task Name"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<textbox id="txtTaskName" maxlength="25" width="250px"></textbox>
+				</row>
+				<row>
+					<hbox>
+						<label value="Task Detail"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<textbox id="txtDetail" rows="5" maxlength="300" width="250px"></textbox>
+				</row>
+				<row>
+					<hbox id="lblAssignee">
+						<label value="Assignee"></label>
+						<label value="*" style="color:red" />
+					</hbox>
+					<combobox id="cmbAssignee"></combobox>
+				</row>
+			</rows>
+		</grid>
+		<separator height="20px"></separator>
+		<separator></separator>
+		<div style="height:30px; width: 100%;">
+			<div style="float:right;">
+				<button id="btnCancel"
+						label="Cancel" mold="trendy"/>			
+			</div>
+			<div style="float:right; margin-right:41%;">
+				<button id="btnSave" label="Save" mold="trendy"></button>
+			</div>
+		</div>
+	</groupbox>
+</window>
+</zk>

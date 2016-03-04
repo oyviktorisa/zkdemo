@@ -1,0 +1,38 @@
+<?page title="User Inquiry" contentType="text/html;charset=UTF-8"?>
+<zk>
+<window title="User Inquiry" border="none" apply="org.viktorisa.demoapp.controller.UserInquiryComposer">
+	<groupbox closable="false" mold="3d">
+		<caption label="User Inquiry"></caption>
+		<grid>
+			<columns>
+				<column width="200px" align="right"></column>
+				<column></column>
+			</columns>
+			<rows>
+				<row>
+					<textbox id="txtUserName"></textbox>
+					<button id="btnFind" mold="trendy" label="Search User Name"></button>
+				</row>
+			</rows>
+		</grid>
+		<separator height="20px"></separator>
+		<groupbox closable="false">
+			<listbox id="lstUser" mold="paging" pagingPosition="both" emptyMessage="No Data Found" pageSize="20">
+				<listhead visible="true">
+					<listheader label="Username" width="250px" sort="auto(userName)"></listheader>
+					<listheader label="Is Admin" width="100px" sort="auto(isAdmin)"></listheader>
+					<listheader label="Is Active" width="100px" sort="auto(isActive)"></listheader>
+					<listheader label="Operations"></listheader>
+				</listhead>
+			</listbox>
+		</groupbox>
+		<separator></separator>
+		<div style="height:30px; width: 100%;">
+			<div style="float:right;">
+				<button id="btnAdd"
+						label="Add New User" mold="trendy" />			
+			</div>
+		</div>
+	</groupbox>
+</window>
+</zk>

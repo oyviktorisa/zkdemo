@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.viktorisa.demoapp.finder.TaskFinder">
+
+	<resultMap id="TaskResultMap" type="org.viktorisa.demoapp.domain.Task">
+		<id column="TASK_ID" jdbcType="DECIMAL" property="taskId" />
+		<result column="TASK_NAME" jdbcType="VARCHAR" property="taskName" />
+		<result column="TASK_DESCRIPTION" jdbcType="VARCHAR" property="taskDescription" />
+		<result column="ASSIGNEE" jdbcType="DECIMAL" property="assignee" />
+		<result column="ASSIGN_BY" jdbcType="DECIMAL" property="assignBy" />
+		<result column="FINISH_DATE" jdbcType="DATE" property="finishDate" />
+		<result column="CREATED_BY" jdbcType="DECIMAL" property="createdBy" />
+		<result column="CREATION_DATE" jdbcType="TIMESTAMP" property="creationDate" />
+		<result column="LAST_UPDATED_BY" jdbcType="DECIMAL" property="lastUpdatedBy" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+		<result column="ASSiGNEE_NAME" jdbcType="VARCHAR" property="assigneeName" />
+	</resultMap>
+	
+	<select id="selectByExample" parameterType="org.viktorisa.demoapp.domain.Task"
+			resultMap="TaskResultMap">
+		SELECT *
+		FROM demo_task
+		<where>
+			<if test="taskName!=null">
+				and task_name = #{taskName}
+			</if>
+		</where>
+		ORDER BY upper(task_name) asc
+	</select>
+	
+	<select id="selectInquiry" parameterType="org.viktorisa.demoapp.domain.Task"
+			resultMap="TaskResultMap">
+		SELECT dt.*, du.user_name assignee_name
+		FROM demo_task dt
+		LEFT JOIN demo_user du
+		ON dt.assignee = du.user_id
+		<where>
+			<if test="taskName!=null">
+				and upper(dt.task_name) like upper(#{taskName})
+			</if>
+			<if test="assignee!=null">
+				and dt.assignee = #{assignee}
+			</if>
+		</where>
+		ORDER BY upper(dt.task_name) asc
+	</select>
+	
+	<select id="assignTask" parameterType="org.viktorisa.demoapp.domain.Task"
+			resultMap="TaskResultMap">
+		UPDATE demo_task
+		SET
+		assignee = #{assignee},
+		assign_by = #{assignBy},
+		last_updated_by = #{lastUpdatedBy}
+		WHERE
+		task_id = #{taskId}
+	</select>
+	
+	<select id="update" parameterType="org.viktorisa.demoapp.domain.Task">
+		UPDATE demo_task
+		SET
+		task_description = #{taskDescription},
+		last_updated_by = #{lastUpdatedBy}
+		WHERE
+		task_id = #{taskId}
+	</select>
+	
+	<select id="save" parameterType="org.viktorisa.demoapp.domain.Task">
+		INSERT INTO demo_task 
+		(task_name, task_description, created_by, creation_date, last_updated_by, last_update_date)
+		VALUES 
+		(#{taskName}, #{taskDescription}, #{createdBy}, #{creationDate}, #{lastUpdatedBy}, #{lastUpdateDate})
+	</select>
+	
+	<select id="delete" parameterType="org.viktorisa.demoapp.domain.Task">
+		DELETE from demo_task
+		WHERE
+		task_id = #{taskId}
+	</select>
+	
+	<select id="finish" parameterType="org.viktorisa.demoapp.domain.Task">
+		UPDATE demo_task
+		SET
+		finish_date = #{finishDate},
+		last_updated_by = #{lastUpdatedBy}
+		WHERE
+		task_id = #{taskId}
+	</select>
+
+</mapper>

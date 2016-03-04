@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.viktorisa.demoapp.finder.UserFinder">
+
+	<resultMap id="UserResultMap" type="org.viktorisa.demoapp.domain.User">
+		<id column="USER_ID" jdbcType="DECIMAL" property="userId" />
+		<result column="USER_NAME" jdbcType="VARCHAR" property="userName" />
+		<result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+		<result column="IS_ACTIVE" javaType="java.lang.Boolean" jdbcType="BOOLEAN" property="active" />
+		<result column="IS_ADMIN" javaType="java.lang.Boolean" jdbcType="BOOLEAN" property="admin" />
+		<result column="CREATED_BY" jdbcType="DECIMAL" property="createdBy" />
+		<result column="CREATION_DATE" jdbcType="TIMESTAMP" property="creationDate" />
+		<result column="LAST_UPDATED_BY" jdbcType="DECIMAL" property="lastUpdatedBy" />
+		<result column="LAST_UPDATE_DATE" jdbcType="TIMESTAMP" property="lastUpdateDate" />
+	</resultMap>
+	
+	<select id="selectAll" resultMap="UserResultMap">
+		SELECT *
+		FROM demo_user
+		ORDER BY user_name asc
+	</select>
+	
+	<select id="selectActiveAll" resultMap="UserResultMap">
+		SELECT *
+		FROM demo_user
+		WHERE is_active = 1
+		ORDER BY user_name asc
+	</select>
+	
+	<select id="selectByExample" parameterType="org.viktorisa.demoapp.domain.User"
+			resultMap="UserResultMap">
+		SELECT *
+		FROM demo_user
+		<where>
+			<if test="userName!=null">
+				and user_name = #{userName}
+			</if>
+		</where>
+		ORDER BY upper(user_name) asc
+	</select>
+	
+	<select id="selectInquiry" parameterType="org.viktorisa.demoapp.domain.User"
+			resultMap="UserResultMap">
+		SELECT *
+		FROM demo_user
+		<where>
+			<if test="userName!=null">
+				and upper(user_name) like upper(#{userName})
+			</if>
+		</where>
+		ORDER BY upper(user_name) asc
+	</select>
+	
+	<select id="delete" parameterType="org.viktorisa.demoapp.domain.User">
+		UPDATE
+		demo_user
+		SET is_active = 0
+		WHERE user_id = #{userId}
+	</select>
+	
+	<select id="save" parameterType="org.viktorisa.demoapp.domain.User">
+		INSERT INTO
+		demo_user
+		VALUES (null, #{userName}, #{password}, 1, #{admin}, 
+		#{lastUpdatedBy}, #{lastUpdateDate}, #{createdBy}, #{creationDate})
+	</select>
+	
+	<select id="update" parameterType="org.viktorisa.demoapp.domain.User">
+		UPDATE
+		demo_user
+		SET 
+		password = #{password}, 
+		is_admin = #{admin},
+		last_updated_by = #{lastUpdatedBy}
+		WHERE user_id = #{userId}
+	</select>
+	
+	<select id="activate" parameterType="org.viktorisa.demoapp.domain.User">
+		UPDATE
+		demo_user
+		SET is_active = 1
+		WHERE user_id = #{userId}
+	</select>
+
+</mapper>

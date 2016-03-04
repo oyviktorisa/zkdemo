@@ -1,0 +1,7 @@
+<grid hflex="1" vflex="1" sclass="sidebar" id="fnList"
+	apply="org.viktorisa.demoapp.controller.SidebarController">
+	<columns>
+		<column />
+	</columns>
+	<rows />
+</grid>
