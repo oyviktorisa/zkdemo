@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.viktorisa.demoapp.domain.DemoTask;
+import org.viktorisa.demoapp.domain.DemoTaskExample;
+import org.viktorisa.demoapp.domain.DemoTaskExample.Criteria;
 import org.viktorisa.demoapp.domain.Task;
 import org.viktorisa.demoapp.domain.User;
 import org.viktorisa.demoapp.service.AuthenticationService;
@@ -66,6 +69,14 @@ public class TaskInquiryComposer extends SelectorComposer<Window>{
 		if(!authenticationServiceImpl.getUserCredential().isAdmin()) {
 			example.setAssignee(authenticationServiceImpl.getUserCredential().getUserId());
 		}
+		/*
+		DemoTaskExample ex = new DemoTaskExample();
+		Criteria criteria = ex.createCriteria();
+		criteria
+		.andTaskNameLike(txtTaskName.getValue())
+		.andAssigneeEqualTo(Integer.parseInt(authenticationServiceImpl.getUserCredential().getUserId().toString()));
+		List<DemoTask> demoTaskList = taskServiceImpl.findByExample(ex);
+		*/
 		List<Task> taskList = taskServiceImpl.selectInquiry(example);
 		ListModelList<Task> model = new ListModelList<Task>(taskList);
 		lstTask.setModel(model);

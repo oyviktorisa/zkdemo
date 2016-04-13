@@ -2,6 +2,8 @@ package org.viktorisa.demoapp.service;
 
 import java.util.List;
 
+import org.viktorisa.demoapp.domain.DemoTask;
+import org.viktorisa.demoapp.domain.DemoTaskExample;
 import org.viktorisa.demoapp.domain.Task;
 
 public interface TaskService {
@@ -19,5 +21,7 @@ public interface TaskService {
 	public void delete(Task task);
 	
 	public void finish(Task task);
-
+	
+	public List<DemoTask> findByExample(DemoTaskExample example);
 }
+	

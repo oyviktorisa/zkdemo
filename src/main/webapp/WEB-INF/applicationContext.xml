@@ -16,7 +16,7 @@
 	  <property name="driverClassName" value="com.mysql.jdbc.Driver" />
 	  <property name="url" value="jdbc:mysql://localhost:3306/demoapp?autoReconnect=true" />
 	  <property name="username" value="root" />
-	  <property name="password" value="user" />
+	  <property name="password" value="password" />
 	</bean>
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
@@ -30,7 +30,7 @@
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-	  <property name="basePackage" value="org.viktorisa.demoapp.finder" />
+	  <property name="basePackage" value="org.viktorisa.demoapp.finder;org.viktorisa.demoapp.dao" />
 	</bean>
   
 </beans>

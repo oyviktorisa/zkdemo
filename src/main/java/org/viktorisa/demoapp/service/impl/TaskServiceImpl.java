@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.viktorisa.demoapp.dao.DemoTaskMapper;
+import org.viktorisa.demoapp.domain.DemoTask;
+import org.viktorisa.demoapp.domain.DemoTaskExample;
 import org.viktorisa.demoapp.domain.Task;
 import org.viktorisa.demoapp.finder.TaskFinder;
 import org.viktorisa.demoapp.service.AuthenticationService;
@@ -15,6 +18,8 @@ public class TaskServiceImpl implements TaskService {
 
 	@Autowired
 	TaskFinder taskFinder;
+	@Autowired
+	DemoTaskMapper demoTaskMapper;
 	@Autowired
 	AuthenticationService authenticationServiceImpl;
 	
@@ -50,6 +55,10 @@ public class TaskServiceImpl implements TaskService {
 		task.setFinishDate(new Date());
 		task.setLastUpdatedBy(authenticationServiceImpl.getUserCredential().getUserId());
 		taskFinder.finish(task);
+	}
+
+	public List<DemoTask> findByExample(DemoTaskExample example) {
+		return demoTaskMapper.selectByExample(example);
 	}
 
 }
